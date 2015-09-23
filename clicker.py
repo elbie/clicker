@@ -37,5 +37,12 @@ def clicklots(x=1000, y=600, l=100000, z=0.02):
         mouseclick(int(currentpos.x),int(currentpos.y))
         time.sleep(z)
 
+def currentpos():
+    loopEvent = CGEventCreate(None)
+    currentpos = CGEventGetLocation(loopEvent)
+    print 'clicker.clicklots(x=' + str(int(currentpos.x)) + ',y=' + str(int(currentpos.y)) + ')'
+    return(int(currentpos.x),int(currentpos.y))
+
 if __name__ == '__main__':
-    clicklots()
+    (x,y) = currentpos()
+    clicklots(x=x,y=y)
