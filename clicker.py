@@ -17,17 +17,13 @@ def mouseclick(posx,posy):
     mouseEvent(kCGEventLeftMouseUp, posx,posy)
 
 def clicklots(x=1000, y=600, l=100000, z=0.02):
+    """ clicks lots """
     mousemove(x, y)
-    # The system may need a moment to catch up before actually getting
-    # current position.  You may need to adjust this sleep interval
-    # accordingly, or just start with your mouse cursor in the
-    # "correct" position
     time.sleep(0.1)
     for i in range(0, l):
         # Check how far we've moved
         loopEvent = CGEventCreate(None)
         currentpos = CGEventGetLocation(loopEvent)
-        #print('X: ' + str(int(currentpos.x)) + ', Y: ' + str(int(currentpos.y)))
         if abs(currentpos.x - x) > 20:
             #print('Strayed outside of X constraint after click ' + str(i))
             break
@@ -38,6 +34,9 @@ def clicklots(x=1000, y=600, l=100000, z=0.02):
         time.sleep(z)
 
 def currentpos():
+    """ grabs the current mouse position, and prints the function call
+        for clicklots with the position filled in.  Returns the position
+        as a tuple """
     loopEvent = CGEventCreate(None)
     currentpos = CGEventGetLocation(loopEvent)
     print 'clicker.clicklots(x=' + str(int(currentpos.x)) + ',y=' + str(int(currentpos.y)) + ')'
