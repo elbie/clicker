@@ -42,11 +42,12 @@ coordinates as a tuple.
 
 Clicks.  Lots.
 
-You can specify the coordinates of the location to click with x and y.
+#### parameters
 
-The delay between clicks is specified in seconds with z.
-
-The number of times to click (loop) is specified with l.
+ x | horizontal position for mouse
+ y | vertical position for mouse
+ z | click delay
+ l | number of iterations (loops)
 
 ## caveats
 
