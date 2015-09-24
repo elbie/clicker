@@ -44,10 +44,12 @@ Clicks.  Lots.
 
 #### parameters
 
- x | horizontal position for mouse
- y | vertical position for mouse
- z | click delay
- l | number of iterations (loops)
+ parameter | default | description
+ ----------|---------|------------
+ x | 1000 | horizontal position for mouse
+ y | 600 |  vertical position for mouse
+ z | 0.02 | click delay
+ l | 10000 | number of iterations (loops)
 
 ## caveats
 
