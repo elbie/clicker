@@ -36,7 +36,8 @@ There are only two definitions which you'll really care about:
 
 Gets the current mouse position, prints out the text for calling
 the clicklots function with populated definition, and returns the
-coordinates as a tuple.
+coordinates as a tuple.  You can just cut and paste that line and
+away you go.
 
 ### clicklots
 
@@ -50,6 +51,10 @@ Clicks.  Lots.
  y | 600 |  vertical position for mouse
  z | 0.02 | click delay
  l | 10000 | number of iterations (loops)
+ k | '' | If non-empty, will iterate through the string and simulate a keypress every kt clicks
+ d | False | Debug mode (prints out more info in the python console)
+ kt | 100 | Number of clicks between keypresses
+ 
 
 ## caveats
 
