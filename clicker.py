@@ -156,6 +156,8 @@ keyCodeMap = {
     'up'             : 0x7E
 }
 
+keyEvent = {}
+
 def mouseEvent(type, posx, posy):
     theEvent = CGEventCreateMouseEvent(None, type, (posx,posy),
                                        kCGMouseButtonLeft)
@@ -184,28 +186,24 @@ def toKeyCode(c):
         keyCode = ord(c)
     return keyCode, shiftKey
 
-def KeyDown(keyCode):
-    time.sleep(0.0001)
-    CGEventPost(kCGHIDEventTap,
-                CGEventCreateKeyboardEvent(None, keyCode, True))
-    time.sleep(0.0001)
-
-def KeyUp(keyCode):
-    time.sleep(0.0001)
-    CGEventPost(kCGHIDEventTap,
-                CGEventCreateKeyboardEvent(None, keyCode, False))
-    time.sleep(0.0001)
-
 def Type(text):
     for key in text:
-        keyCode, shiftKey = toKeyCode(key)
-        KeyDown(keyCode)
-        KeyUp(keyCode)
+        time.sleep(0.0001)
+        CGEventPost(kCGHIDEventTap, keyEvent[key][0])
+        time.sleep(0.0001)
+        CGEventPost(kCGHIDEventTap, keyEvent[key][1])
+        time.sleep(0.0001)
 
 def clicklots(x=1000, y=600, l=100000, z=0.02, k='', d=False, kt=100):
     """ clicks lots """
     mousemove(x, y)
     time.sleep(0.1)
+    # Pregenerate all the key events
+    for key in k:
+        keyCode, shiftKey = toKeyCode(key)
+        keyEvent[key] = (CGEventCreateKeyboardEvent(None, keyCode, True),
+                         CGEventCreateKeyboardEvent(None, keyCode, False)
+                        )
     for i in range(0, l):
         # Check how far we've moved
         loopEvent = CGEventCreate(None)
@@ -220,11 +218,11 @@ def clicklots(x=1000, y=600, l=100000, z=0.02, k='', d=False, kt=100):
             break
         mouseclick(int(currentpos.x),int(currentpos.y))
         time.sleep(z)
-        if k <> '' and i % kt == 0:
+        if k != '' and i % kt == 0:
             if d:
-                print('Typing "' + k[0] + '" after click ' + str(i))
+                print('Typing first character of "' + k + '" after click ' + str(i))
             Type(k[0])
-            k = k[1:] + k
+            k = k[1:] + k[0]
 
 def currentpos():
     """ grabs the current mouse position, and prints the function call
