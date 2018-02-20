@@ -3,6 +3,7 @@
 import sys
 import time
 from Quartz.CoreGraphics import *
+from random import sample
 
 shiftChars = {
     '~': '`',
@@ -194,11 +195,12 @@ def Type(text):
         CGEventPost(kCGHIDEventTap, keyEvent[key][1])
         time.sleep(0.0001)
 
-def clicklots(x=1000, y=600, l=100000, z=0.02, k='', d=False, kt=100):
+def clicklots(x=1000, y=600, l=100000, z=0.02, k='', kr=False, kt=100, d=False):
     """ clicks lots """
     mousemove(x, y)
     time.sleep(0.1)
     # Pregenerate all the key events
+    kl = len(k)
     for key in k:
         keyCode, shiftKey = toKeyCode(key)
         keyEvent[key] = (CGEventCreateKeyboardEvent(None, keyCode, True),
@@ -219,6 +221,9 @@ def clicklots(x=1000, y=600, l=100000, z=0.02, k='', d=False, kt=100):
         mouseclick(int(currentpos.x),int(currentpos.y))
         time.sleep(z)
         if k != '' and i % kt == 0:
+            if kr and i % (kt*kl) == 0:
+                # Scramble list
+                k = ''.join(sample(k,kl))
             if d:
                 print('Typing first character of "' + k + '" after click ' + str(i))
             Type(k[0])

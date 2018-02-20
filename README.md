@@ -52,8 +52,9 @@ Clicks.  Lots.
  z | 0.02 | click delay
  l | 10000 | number of iterations (loops)
  k | '' | If non-empty, will iterate through the string and simulate a keypress every kt clicks
- d | False | Debug mode (prints out more info in the python console)
+ kr | False | Shuffle the keypress order before every complete sequence
  kt | 100 | Number of clicks between keypresses
+ d | False | Debug mode (prints out more info in the python console)
  
 
 ## caveats
